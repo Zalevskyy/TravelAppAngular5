@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../shared/user.model';
-import { UserService } from '../shared/user.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService} from 'ngx-toastr';
+import { User } from '../../shared/user.model';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,11 +23,10 @@ export class SignUpComponent implements OnInit {
     if (form != null)
       form.reset();
     this.user = {
-      UserName: '',
-      Password: '',
+      //UserName: '',
       Email: '',
-      FirstName: '',
-      LastName: ''
+      Password: '',
+      ConfirmPassword: ''
     }
   }
  

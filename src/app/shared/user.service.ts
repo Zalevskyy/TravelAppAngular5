@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {  Response } from "@angular/http";
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from "@angular/http";
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
 
@@ -12,13 +12,19 @@ export class UserService {
 
   registerUser(user : User){
     const body: User = {
-      UserName: user.UserName,
-      Password: user.Password,
+      //userName: user.Name,
       Email: user.Email,
-      FirstName: user.FirstName,
-      LastName: user.LastName
+      Password: user.Password,
+      ConfirmPassword: user.ConfirmPassword      
     }
+    var reqHeader = new HttpHeaders({'No-Auth':'True'});
     return this.http.post(this.rootUrl + '/api/Account/Register', body);
+  }
+  userAuthentication(email,password){
+    //var data = "username"+userName+"&password"+password+"&grant_type=password";
+    var data = "email="+email+"&password="+password+"&grant_type=password";
+    var reqHeader = new HttpHeaders({'Content-Type':'application/x-www-urlencoded','No-Auth':'True'});
+    return this.http.post(this.rootUrl+'/token',data,{headers:reqHeader});
   }
 
 }
