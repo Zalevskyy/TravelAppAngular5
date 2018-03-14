@@ -27,8 +27,6 @@ export class GoogleMapAgmComponent implements OnInit {
   ngOnInit() {
       // установим широту и долготу и zoom по умолчанию
     this.zoom = 12;
-    //this.latitude = 49.017950;
-    //this.longitude = 23.812735;
   
     // создаём новый search FormControl
     this.searchControl = new FormControl();
@@ -39,7 +37,7 @@ export class GoogleMapAgmComponent implements OnInit {
     // загружаем места для автодополнения
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+        types: ["(cities)"]
       });
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
@@ -50,10 +48,7 @@ export class GoogleMapAgmComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-  console.log(place.adr_address);
-  console.log(place);
-  length = place.address_components.length;
-  console.log(length);
+
   console.log(place.address_components[2].long_name);
   console.log(place.address_components[length-1].long_name);
   
@@ -85,7 +80,6 @@ export class GoogleMapAgmComponent implements OnInit {
     this.latitude = event.coords.lat;
     this.longitude = event.coords.lng;
     this.lockationChosen = true;
-
   }
 
   infoWindowOpened = null;
@@ -96,8 +90,9 @@ export class GoogleMapAgmComponent implements OnInit {
       this.infoWindowOpened.close();      
     this.infoWindowOpened = infoWindow;
   }
+  
+
 }
-// just an interface for type safety.
 interface marker {
 	lat: number;
 	lng: number;

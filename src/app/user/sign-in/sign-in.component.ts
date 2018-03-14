@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -15,13 +17,16 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-  OnSubmit(email,password){
-    this.userService.userAuthentication(email,password).subscribe((data:any)=>{
+  OnSubmit(form: NgForm){
+    console.log(form.value.UserName);
+    console.log(form.value.Password);
+    this.userService.userAuthentication(form.value.UserName,form.value.Password).subscribe((data:any)=>{
       localStorage.setItem('userToken',data.access_token);
       this.router.navigate(['/home']);
     },
     (err : HttpErrorResponse)=>{
       this.isLoginError = true;
+      console.log(err);
     } );
   }
 }

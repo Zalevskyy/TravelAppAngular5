@@ -23,7 +23,6 @@ export class SignUpComponent implements OnInit {
     if (form != null)
       form.reset();
     this.user = {
-      //UserName: '',
       Email: '',
       Password: '',
       ConfirmPassword: ''
@@ -39,6 +38,7 @@ export class SignUpComponent implements OnInit {
         }
         else
           this.toastr.error(data.Errors[0]);
+          //this.toastr.error('Something wrong!');
       });
     }
 }

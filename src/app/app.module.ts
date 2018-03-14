@@ -5,7 +5,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule} from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
-
+import {Http, HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { UserService } from './shared/user.service';
 import { ToastrModule } from 'ngx-toastr';
@@ -16,9 +16,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { GoogleMapComponent } from './home/google-map/google-map.component';
 import { GoogleMapAgmComponent } from './home/google-map-agm/google-map-agm.component';
-import { GoogleMapJsComponent } from './home/google-map-js/google-map-js.component';
 
 
 @NgModule({
@@ -28,9 +26,7 @@ import { GoogleMapJsComponent } from './home/google-map-js/google-map-js.compone
     UserComponent,
     SignInComponent,
     HomeComponent,
-    GoogleMapComponent,
-    GoogleMapAgmComponent,
-    GoogleMapJsComponent
+    GoogleMapAgmComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -45,7 +41,7 @@ import { GoogleMapJsComponent } from './home/google-map-js/google-map-js.compone
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UserService, AuthGuard,
+  providers: [UserService, Http, AuthGuard,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
