@@ -7,7 +7,8 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  readonly rootUrl = 'http://localhost:5860';
+  //readonly rootUrl = 'http://localhost:5860';
+  readonly rootUrl = 'http://travelappbyzalevskyy.azurewebsites.net';
   constructor(private http: HttpClient) { }
 
    registerUser(user : User){
